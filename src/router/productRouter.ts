@@ -18,6 +18,9 @@ const productController: ProductController = new ProductController(
   productBusiness
 );
 
+productRouter.get("/", (req, res) =>
+  productController.getAllProductsController(req, res)
+);
 productRouter.post("/", (req, res) =>
   productController.createProductController(req, res)
 );

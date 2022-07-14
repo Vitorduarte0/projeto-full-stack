@@ -28,4 +28,21 @@ export class ProductController {
       }
     }
   };
+  getAllProductsController = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const products = await this.productBusiness.getAllProducts();
+      res.send({ products });
+    } catch (error) {
+      if (error instanceof CustomError) {
+        res.status(error.statusCode).send({ message: error.message });
+      } else if (error) {
+        res.status(400).send({ error });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+  };
 }

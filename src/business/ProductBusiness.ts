@@ -28,4 +28,8 @@ export class ProductBusiness {
     };
     await this.productDataBase.createProduct(product);
   };
+  getAllProducts = async (): Promise<Product[]> => {
+    const products = await this.productDataBase.getAllProductsDataBase();
+    return products;
+  };
 }
