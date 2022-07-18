@@ -8,8 +8,6 @@ export class UserDataBase extends BaseDataBase implements IUserDataBase {
     await this.getConnection().insert(user).into(this.TABLE_NAME);
   };
 
-
-
   findUserByEmail = async (email: string): Promise<User> => {
     const user = await this.getConnection()
       .from(this.TABLE_NAME)

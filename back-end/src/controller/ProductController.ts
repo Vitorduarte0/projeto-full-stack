@@ -33,7 +33,9 @@ export class ProductController {
     res: Response
   ): Promise<void> => {
     try {
-      const products = await this.productBusiness.getAllProducts();
+      const name = req.query.name as string;
+
+      const products = await this.productBusiness.getAllProducts(name);
       res.send({ products });
     } catch (error) {
       if (error instanceof CustomError) {

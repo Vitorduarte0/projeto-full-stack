@@ -13,7 +13,7 @@ export class UserController {
         email,
         password
       };
-
+      
       const token = await this.userBusiness.signUpBusiness(userDTO);
       res.status(201).send({
         message: `Olá, ${name}! Seu dados foram cadastrado no VT ecomerce`,

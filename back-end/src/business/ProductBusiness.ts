@@ -28,8 +28,14 @@ export class ProductBusiness {
     };
     await this.productDataBase.createProduct(product);
   };
-  getAllProducts = async (): Promise<Product[]> => {
-    const products = await this.productDataBase.getAllProductsDataBase();
+  getAllProducts = async (name: string): Promise<Product[]> => {
+    if (!name) {
+      name = "%";
+    }
+    const products = await this.productDataBase.getAllProductsDataBase(name);
+    if (!products[0]) {
+      throw new CustomError("Produto não encontrado", 404);
+    }
     return products;
   };
 }
