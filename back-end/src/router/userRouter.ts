@@ -5,6 +5,7 @@ import { UserDataBase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManeger";
 import { IdGenerator } from "../services/IdGenerator";
+import { NodeMailer } from "../services/NodeMailer";
 
 export const userRouter = Router();
 
@@ -12,12 +13,13 @@ const idGenerator: IdGenerator = new IdGenerator();
 const authenticator: Authenticator = new Authenticator();
 const hashManeger: HashManager = new HashManager();
 const userDataBase: UserDataBase = new UserDataBase();
-
+const nodeMailer: NodeMailer = new NodeMailer();
 const userBusiness: UserBusiness = new UserBusiness(
   idGenerator,
   authenticator,
   hashManeger,
-  userDataBase
+  userDataBase,
+  nodeMailer
 );
 const userController: UserController = new UserController(userBusiness);
 

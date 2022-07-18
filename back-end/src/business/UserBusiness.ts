@@ -4,6 +4,7 @@ import { User } from "../interface/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManeger";
 import { IdGenerator } from "../services/IdGenerator";
+import { NodeMailer } from "../services/NodeMailer";
 import { authenticationData } from "../types/authenticationData";
 import { loginDTO, userDTO } from "../types/user";
 
@@ -12,7 +13,8 @@ export class UserBusiness {
     private idGenerator: IdGenerator,
     private authenticator: Authenticator,
     private hashManeger: HashManager,
-    private userDataBase: IUserDataBase
+    private userDataBase: IUserDataBase,
+    private nodeMailer: NodeMailer
   ) {}
   signUpBusiness = async (user: userDTO): Promise<string> => {
     const { name, email, password } = user;
@@ -49,7 +51,10 @@ export class UserBusiness {
       id
     };
     const token = this.authenticator.generationToken(payload);
+    await this.nodeMailer.sendEmailToNewUsers(email, password);
+
     await this.userDataBase.signUpData(createUser);
+
     return token;
   };
   loginBusiness = async (userLogin: loginDTO): Promise<string> => {
@@ -70,7 +75,7 @@ export class UserBusiness {
       password,
       verifyExitUser.password
     );
- 
+
     if (!isPassword) {
       throw new CustomError("Email ou senha está incorreta", 401);
     }
