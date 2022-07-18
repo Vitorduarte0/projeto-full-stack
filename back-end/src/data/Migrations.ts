@@ -17,6 +17,14 @@ export class Migrations extends BaseDataBase {
         price FLOAT NOT NULL,
         image_url TEXT(1023) NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS ecommercePurchases(
+      id VARCHAR(255) PRIMARY KEY,
+      user_id VARCHAR(255) NOT NULL,
+      product_id VARCHAR(255) NOT NULL,
+      quantify FLOAT NOT NULL,
+        date_purchases VARCHAR(50),
+      total_price FLOAT NOT NULL
+    );
      `
       )
       .then(() => console.log("Tabela criada com sucesso"))

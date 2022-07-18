@@ -1,7 +1,7 @@
 import knex, { Knex } from "knex";
 import dotenv from "dotenv";
 dotenv.config();
-export abstract class BaseDataBase {
+export class BaseDataBase {
   private static connection: Knex | null = null;
   protected getConnection(): Knex {
     if (!BaseDataBase.connection) {

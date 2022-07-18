@@ -13,4 +13,11 @@ export class ProductDataBase extends BaseDataBase implements IProductDataBase {
   createProduct = async (product: Product): Promise<void> => {
     await this.getConnection().insert(product).into(this.TABLE_NAME);
   };
+
+  productById = async (id: string): Promise<Product> => {
+    const product = await this.getConnection()
+      .from(this.TABLE_NAME)
+      .where({ id });
+    return product[0];
+  };
 }
