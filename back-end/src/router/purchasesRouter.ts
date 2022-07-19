@@ -29,6 +29,9 @@ const purchasesBusiness: PurchasesBusiness = new PurchasesBusiness(
 const purchasesController: PurchasesController = new PurchasesController(
   purchasesBusiness
 );
+purchasesRouter.get("/order", (req, res) =>
+  purchasesController.getOrderPurchases(req, res)
+);
 purchasesRouter.post("/register/:product_id", (req, res) =>
   purchasesController.registerPurchases(req, res)
 );

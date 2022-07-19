@@ -22,8 +22,10 @@ export class Migrations extends BaseDataBase {
       user_id VARCHAR(255) NOT NULL,
       product_id VARCHAR(255) NOT NULL,
       quantify FLOAT NOT NULL,
-        date_purchases VARCHAR(50),
-      total_price FLOAT NOT NULL
+	    date_purchases VARCHAR(50),
+      total_price FLOAT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES ecommerceUsers(id),
+	    FOREIGN KEY (product_id) REFERENCES ecommerceProduct(id)
     );
      `
       )

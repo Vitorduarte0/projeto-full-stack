@@ -29,7 +29,6 @@ export class PurchasesBusiness {
       throw new CustomError("É preciso informar a quantidade do produto!", 404);
     }
     const user = await this.authenticator.getTokenData(token);
-    console.log("id do usuario", user.id);
 
     const totalPrice = quantify * product.price;
     const date = new Date();
@@ -44,5 +43,16 @@ export class PurchasesBusiness {
     };
 
     await this.purchasesData.createRegisterPurchase(purchases);
+  };
+  getOrderPurchasesBusiness = async (token: string): Promise<Purchases> => {
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new CustomError("Usuário deslogado!", 401);
+    }
+    const orderPurchases = await this.purchasesData.getOrderPurchase(
+      tokenData.id
+    );
+    
+    return orderPurchases;
   };
 }
